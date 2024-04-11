@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <h1 class="d-flex justify-content-center mt-2">Welcome!</h1>
+    <div class="container mt-4">
+        <form action="/posts" method="POST">
+            <div class="form-group">
+                <textarea class="form-control" name="postText" id="postText" rows="4" placeholder="Start writing..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        </form>
+    </div>
+    <% if(posts.length > 0 ) { %>
+        <% posts.forEach(post => { %>
+            <div class="card mb-2 mx-4">
+                <div class="card-body">
+                    <p><%= post.postText %></p>
+                    <small><%= new Date(post.createdAt).toLocaleString() %></small>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p class="d-flex justify-content-center mt-4">No posts found.</p>
+    <% } %>
+</body>
+</html>

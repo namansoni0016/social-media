@@ -1,10 +1,15 @@
 import express from "express";
 import { config } from "dotenv";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 
 const app = express();
 
 config({ path: ".env" });
+
+//Middlewares
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 // Creating database
 mongoose.connect('mongodb://localhost:27017/socialMedia')
@@ -12,11 +17,13 @@ mongoose.connect('mongodb://localhost:27017/socialMedia')
     console.log("Database connected");
 }).catch((error) => {
     console.log("Error connecting to mongodb.", error);
-})
+});
 
 // Creating schema
 const postSchema = new mongoose.Schema({
-    text: String,
+    postText: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -24,11 +31,18 @@ const postSchema = new mongoose.Schema({
 });
 
 //Creating Model
-const postModel = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', postSchema);
 
-app.get("/", (req, res) => {
-    res.send("Welcome!!");
+app.get("/", async (req, res) => {
+    const posts = await Post.find().sort({ createdAt: 'desc'});
+    res.render('index', { posts });
 });
+
+app.post("/posts", async(req, res) => {
+    const newPost = new Post(req.body);
+    await newPost.save();
+    res.redirect('/');
+})
 
 // Starting Server
 const port = process.env.PORT;
