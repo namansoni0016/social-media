@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h3 class="d-flex justify-content-center mt-4 mb-4">Create A New Post</h3>
+        <form action="/posts" method="POST">
+            <div class="form-group">
+                <textarea class="form-control" name="postText" id="postText" rows="4" placeholder="Start writing..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Post</button>
+            <a href="/" class="btn btn-primary mb-3">Go Back</a>
+        </form>
+    </div>
+</body>
+</html>

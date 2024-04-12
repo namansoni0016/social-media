@@ -38,6 +38,10 @@ app.get("/", async (req, res) => {
     res.render('index', { posts });
 });
 
+app.get("/newPost", (req, res) => {
+    res.render('new');
+});
+
 app.post("/posts", async(req, res) => {
     const newPost = new Post(req.body);
     await newPost.save();

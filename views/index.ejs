@@ -8,18 +8,17 @@
 </head>
 <body>
     <h1 class="d-flex justify-content-center mt-2">Welcome!</h1>
-    <div class="container mt-4">
-        <form action="/posts" method="POST">
-            <div class="form-group">
-                <textarea class="form-control" name="postText" id="postText" rows="4" placeholder="Start writing..."></textarea>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <a href="/newPost" class="btn btn-outline-primary mb-4 mt-2">Create new post</a>
             </div>
-            <button type="submit" class="btn btn-primary mb-3">Submit</button>
-        </form>
+        </div>
     </div>
     <% if(posts.length > 0 ) { %>
         <% posts.forEach(post => { %>
             <div class="card mb-2 mx-4">
-                <div class="card-body">
+                <div class="card-body shadow">
                     <p><%= post.postText %></p>
                     <small><%= new Date(post.createdAt).toLocaleString() %></small>
                 </div>
