@@ -21,6 +21,16 @@
                 <div class="card-body shadow">
                     <p><%= post.postText %></p>
                     <small><%= new Date(post.createdAt).toLocaleString() %></small>
+                    <div class="row mt-4">
+                        <div class="col-md-1">
+                            <a href="/posts/<%= post._id %>/edit" class="btn btn-sm btn-outline-info">Edit</a>
+                        </div>
+                        <div class="col-md-1">
+                            <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         <% }) %>
