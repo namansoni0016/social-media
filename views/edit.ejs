@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editing Post</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-4">
-        <h1>Edit Post</h1>
-        <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
-            <div class="form-group">
-                <textarea name="postText" id="postText" rows="4" class="form-control"><%= post.postText %></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-    </div>
-</body>
-</html>
+<% layout(`layouts/boilerplate`) %>
+<div class="container mt-4">
+    <h1>Edit Post</h1>
+    <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+        <div class="form-group">
+            <textarea name="postText" id="postText" rows="4" class="form-control"><%= post.postText %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/" class="btn btn-primary">Go Back</a>
+    </form>
+</div>

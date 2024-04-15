@@ -1,9 +1,9 @@
 import express from "express";
 import { config } from "dotenv";
 import mongoose from "mongoose";
+import ejsMate from "ejs-mate";
 import bodyParser from "body-parser";
 import methodOverride from "method-override";
-import { Post } from "./models/postsModel.js";
 import postRoutes from "./routes/postsRoutes.js";
 
 const app = express();
@@ -11,6 +11,7 @@ const app = express();
 config({ path: ".env" });
 
 //Middlewares
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(methodOverride('_method')); 

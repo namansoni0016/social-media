@@ -1,41 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media App</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <h1 class="d-flex justify-content-center mt-2">Welcome!</h1>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-auto">
-                <a href="/newPost" class="btn btn-outline-primary mb-4 mt-2">Create new post</a>
-            </div>
+<% layout(`layouts/boilerplate`) %>
+<h1 class="d-flex justify-content-center mt-2">Welcome!</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <a href="/newPost" class="btn btn-outline-primary mb-4 mt-2">Create new post</a>
         </div>
     </div>
-    <% if(posts.length > 0 ) { %>
-        <% posts.forEach(post => { %>
-            <div class="card mb-2 mx-4">
-                <div class="card-body shadow">
-                    <p><%= post.postText %></p>
-                    <small><%= new Date(post.createdAt).toLocaleString() %></small>
-                    <div class="row mt-4">
-                        <div class="col-md-1">
-                            <a href="/posts/<%= post._id %>/edit" class="btn btn-sm btn-outline-info">Edit</a>
-                        </div>
-                        <div class="col-md-1">
-                            <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </div>
+</div>
+<% if(posts.length > 0 ) { %>
+    <% posts.forEach(post => { %>
+        <div class="card mb-2 mx-4">
+            <div class="card-body shadow">
+                <p><%= post.postText %></p>
+                <small><%= new Date(post.createdAt).toLocaleString() %></small>
+                <div class="row mt-4">
+                    <div class="col-md-1">
+                        <a href="/posts/<%= post._id %>/edit" class="btn btn-sm btn-outline-info">Edit</a>
+                    </div>
+                    <div class="col-md-1">
+                        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        <% }) %>
-    <% } else { %>
-        <p class="d-flex justify-content-center mt-4">No posts found.</p>
-    <% } %>
-</body>
-</html>
+        </div>
+    <% }) %>
+<% } else { %>
+    <p class="d-flex justify-content-center mt-4">No posts found.</p>
+<% } %>
