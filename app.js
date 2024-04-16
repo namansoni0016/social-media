@@ -5,6 +5,7 @@ import ejsMate from "ejs-mate";
 import bodyParser from "body-parser";
 import methodOverride from "method-override";
 import postRoutes from "./routes/postsRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(methodOverride('_method'));
 
 //For Routes
 app.use("/", postRoutes);
+app.use("/", userRoutes);
 
 // Creating database
 mongoose.connect('mongodb://localhost:27017/socialMedia')

@@ -1,4 +1,3 @@
-import { Post } from "../models/postsModel.js";
 import express from "express";
 const router = express.Router();
 import { home, 
