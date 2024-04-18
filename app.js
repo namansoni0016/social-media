@@ -6,6 +6,8 @@ import bodyParser from "body-parser";
 import methodOverride from "method-override";
 import postRoutes from "./routes/postsRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import { authenticate } from "./middlewares/authenticate.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(methodOverride('_method')); 
+app.use(cookieParser());
+app.use(authenticate);
 
 //For Routes
 app.use("/", postRoutes);

@@ -2,7 +2,7 @@ import { Post } from "../models/postsModel.js";
 
 export const home = async (req, res) => {
     const posts = await Post.find().sort({ createdAt: 'desc'});
-    res.render('index', { posts });
+    res.render('index', { posts, currentUser: res.locals.currentUser });
 };
 
 export const getNewPost = (req, res) => {
