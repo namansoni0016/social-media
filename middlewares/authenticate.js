@@ -10,6 +10,7 @@ export const authenticate = (req, res, next) => {
                 next();
             } else { 
                 res.locals.currentUser = { userId: decodedToken.userId };
+                req.userId = decodedToken.userId;
                 next();
             }
         });
