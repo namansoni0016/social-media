@@ -1,8 +1,8 @@
 import { Post } from "../models/postsModel.js";
 
 export const home = async (req, res) => {
-    const posts = await Post.find().sort({ createdAt: 'desc'});
-    res.render('index', { posts, currentUser: res.locals.currentUser });
+    const posts = await Post.find().populate('user').sort({ createdAt: 'desc'});
+    res.render('index', { posts });
 };
 
 export const getNewPost = (req, res) => {
@@ -10,9 +10,18 @@ export const getNewPost = (req, res) => {
 };
 
 export const postNewPost = async(req, res) => {
-    const newPost = new Post(req.body);
-    await newPost.save();
-    res.redirect('/');
+    try {
+        const userId = res.locals.currentUser.userId;
+        const newPost = new Post({
+            postText: req.body.postText,
+            user: userId
+        });
+        await newPost.save();
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error!')
+    }
 };
 
 export const getEditPost = async (req, res) => {

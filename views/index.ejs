@@ -1,31 +1,42 @@
 <% layout('layouts/boilerplate') %>
-<h1 class="d-flex justify-content-center mt-auto">Welcome to PulsePost!</h1>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <a href="/newPost" class="btn btn-outline-primary mb-4 mt-2">Create new post</a>
+<% if(currentUser) { %>
+    <h1 class="d-flex justify-content-center mt-auto">Welcome to PulsePost!</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <a href="/newPost" class="btn btn-outline-primary mb-4 mt-2">Create new post</a>
+            </div>
         </div>
     </div>
-</div>
-<% if(posts.length > 0 ) { %>
-    <% posts.forEach(post => { %>
-        <div class="card mb-2 mx-4">
-            <div class="card-body shadow">
-                <p><%= post.postText %></p>
-                <small><%= new Date(post.createdAt).toLocaleString() %></small>
-                <div class="row mt-4">
-                    <div class="col-md-1">
-                        <a href="/posts/<%= post._id %>/edit" class="btn btn-sm btn-outline-info">Edit</a>
-                    </div>
-                    <div class="col-md-1">
-                        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+    <% if(posts.length > 0 ) { %>
+        <% posts.forEach(post => { %>
+            <div class="card mb-2 mx-4">
+                <div class="card-body shadow">
+                    <p><%= post.postText %> - <strong><%= post.user.name %></strong></p>
+                    <small><%= new Date(post.createdAt).toLocaleString() %></small>
+                    <div class="row mt-4">
+                        <div class="col-md-1">
+                            <a href="/posts/<%= post._id %>/edit" class="btn btn-sm btn-outline-info">Edit</a>
+                        </div>
+                        <div class="col-md-1">
+                            <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <% }) %>
+        <% }) %>
+    <% } else { %>
+        <p class="d-flex justify-content-center mt-4">No posts found.</p>
+    <% } %>
 <% } else { %>
-    <p class="d-flex justify-content-center mt-4">No posts found.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+                <h1>Pulse Post</h1>
+            </div>
+        </div>
+    </div>
 <% } %>
+

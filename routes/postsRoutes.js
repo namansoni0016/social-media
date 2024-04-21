@@ -6,17 +6,18 @@ import { home,
     getEditPost, 
     editPost, 
     deletePost } from "../controllers/postsController.js";
+import { authenticate } from "../middlewares/authenticate.js";
 
-router.get("/", home);
+router.get("/", authenticate, home);
 
 router.get("/newPost", getNewPost);
 
-router.post("/posts", postNewPost);
+router.post("/posts", authenticate, postNewPost);
 
-router.get("/posts/:id/edit", getEditPost);
+router.get("/posts/:id/edit", authenticate, getEditPost);
 
-router.put("/posts/:id", editPost);
+router.put("/posts/:id", authenticate, editPost);
 
-router.delete("/posts/:id", deletePost);
+router.delete("/posts/:id", authenticate, deletePost);
 
 export default router;
