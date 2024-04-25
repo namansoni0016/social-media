@@ -41,6 +41,19 @@ export const postRegister = async(req, res) => {
     }
 };
 
+export const getProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if(!user) {
+            return res.status(404).send('User not found!');
+        }
+        res.render('profile', {user});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error!');
+    }
+}
+
 export const logout = (req, res) => {
     res.clearCookie('jwt');
     res.redirect('/login');

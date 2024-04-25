@@ -5,7 +5,9 @@ import { getLogin,
     getRegister, 
     postRegister, 
     postLogin, 
-    logout } from "../controllers/userController.js";
+    logout, 
+    getProfile } from "../controllers/userController.js";
+import { authenticate } from "../middlewares/authenticate.js";
 
 router.get("/login", getLogin);
 
@@ -15,6 +17,8 @@ router.get("/register", getRegister);
 
 router.post("/register", postRegister);
 
-router.get('/logout', logout);
+router.get('/logout', authenticate, logout);
+
+router.get('/profile', authenticate, getProfile);
 
 export default router;
